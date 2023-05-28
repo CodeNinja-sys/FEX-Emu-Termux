@@ -3,4 +3,22 @@ echo "Installing x11-repo..."
 pkg install x11-repo -y
 echo "Installing other packages..."
 pkg install pulseaudio xwayland wget proot-distro
-echo -e "Downloading and installing the Termux-x11 package..."
+echo "Iinstalling the Termux-x11 package..."
+wget https://github.com/CodeNinja-sys/FEX-Emu-Termux/raw/main/termux-x11-1.02.07-0-all.deb
+dpkg -i termux-x11-1.02.07-0-all.deb
+mkdir $PREFIX/tmp/.X11-unix
+echo "Installing rootfs.."
+wget  https://github.com/CodeNinja-sys/FEX-Emu-Termux/raw/main/fex-rootfs.tar.xz
+mkdir /data/data/com.termux/files/usr/var/lib/proot-distro/
+mkdir /data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs/
+mkdir /data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs/ubuntu
+proot-distro restore fex-rootfs.tar.xz
+echo "Rootfs installed"
+echo "Downloading starting scripts..."
+https://github.com/CodeNinja-sys/FEX-Emu-Termux/raw/main/scripts/start-fex
+chmod +x start-fex
+mv start-fex $PREFIX/bin
+rm -rf fex-rootfs.tar.xz &>/dev/null
+rm -rf termux-x11-1.02.07-0-all.deb &>/dev/null
+rm -rf install-fex &>/dev/null
+echo " Install finished. To start Fex-Emu + Wine type 'start-fex' "
