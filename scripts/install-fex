@@ -1,0 +1,6 @@
+clear
+echo "Installing x11-repo..."
+pkg install x11-repo -y
+echo "Installing other packages..."
+pkg install pulseaudio xwayland wget proot-distro
+echo -e "Downloading and installing the Termux-x11 package..."
